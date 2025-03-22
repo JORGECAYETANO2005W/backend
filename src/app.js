@@ -37,7 +37,7 @@ const app = express();
 const allowedOrigins = ["http://localhost:8081", "http://localhost:5173"];
 
 app.use(cors({
-    origin: allowedOrigins, // Permitir solo estos orígenes
+    origin: "*", // Permitir solo estos orígenes
     credentials: true // Permitir credenciales (cookies, headers de autenticación, etc.)
 }));
 
