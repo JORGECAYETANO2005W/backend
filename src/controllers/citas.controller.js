@@ -98,3 +98,18 @@ export const updateCita = async (req, res) => {
         return res.status(500).json({ message: error.message });
     }
 };
+
+// Obtener todas las citas creadas por un usuario específico
+export const getCitasByUser = async (req, res) => {
+    try {
+      const userId = req.user.id; // Obtener el ID del usuario autenticado desde el token
+  
+      // Buscar las citas donde el campo user coincida con el ID del usuario
+      const citas = await Cita.find({ user: userId }).populate('user', 'name email');
+  
+      res.json(citas);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Hubo un fallo al obtener las citas del usuario" });
+    }
+  };

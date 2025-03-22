@@ -77,6 +77,7 @@ app.use("/api", redesSociales);
 app.use("/api", dispositivo);
 app.use("/api",estadoDispositivoo);
 app.use("/api",contacto)
+app.use("/api",citas)
 
 
 export default app;
