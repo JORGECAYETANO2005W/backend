@@ -10,8 +10,6 @@ export const createContactoSchema = z.object({
         .email({ message: "Por favor ingrese un correo válido" })
         .max(255, { message: "El correo no puede superar los 255 caracteres" }),
 
-    user: z.string()
-        .regex(/^[0-9a-fA-F]{24}$/, { message: "ID de usuario no válido" }),
 
     estado: z.boolean().optional() // Es opcional, por defecto es `true` en el modelo
 });
