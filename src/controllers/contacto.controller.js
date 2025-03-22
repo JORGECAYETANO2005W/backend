@@ -29,7 +29,7 @@ export const createContacto = async (req, res) => {
         const newContacto = new Contacto({
             telefono,
             email,
-            user: existingUser._id,
+            user: existingUser._id, // Campo obligatorio
             estado: true, // Contacto activo por defecto
         });
 
