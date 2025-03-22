@@ -5,7 +5,8 @@ import {
     getCita,         // Controlador para obtener una cita específica
     createCita,      // Controlador para crear una nueva cita
     updateCita,      // Controlador para actualizar una cita existente
-    deleteCita       // Controlador para eliminar una cita
+    deleteCita,
+    getCitasByUser       // Controlador para eliminar una cita
 } from '../controllers/citas.controller.js';
 import { validateSchema } from '../middlewares/validator.middlewar.js'; // Middleware para validar los datos según un esquema
 import { createCitaSchema } from '../schemas/citas.schema.js'; // Esquema de validación para la creación de citas
