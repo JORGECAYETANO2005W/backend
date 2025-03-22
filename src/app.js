@@ -33,12 +33,17 @@ dotenv.config();
 const app = express();
 
 // Configuración de CORS
-// Configuración de CORS
 const allowedOrigins = ["http://localhost:8081", "http://localhost:5173"];
-
 app.use(cors({
-    origin: "*", // Permitir solo estos orígenes
-    credentials: true // Permitir credenciales (cookies, headers de autenticación, etc.)
+    origin: function(origin, callback) {
+        // Allow requests with no origin (like mobile apps, curl requests)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) {
+            return callback(new Error('The CORS policy for this site does not allow access from the specified origin.'), false);
+        }
+        return callback(null, true);
+    },
+    credentials: true
 }));
 
 app.use(morgan("dev"));
