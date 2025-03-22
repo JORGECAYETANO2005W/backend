@@ -37,14 +37,8 @@ const app = express();
 const allowedOrigins = ["http://localhost:8081", "http://localhost:5173"];
 
 app.use(cors({
-    origin: function(origin, callback) {
-        // Permitir solicitudes sin origen (por ejemplo, para Postman u otros clientes)
-        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-            return callback(null, true);
-        }
-        return callback(new Error("CORS no permitido por esta URL"), false);
-    },
-    credentials: true
+    origin: allowedOrigins, // Permitir solo estos orígenes
+    credentials: true // Permitir credenciales (cookies, headers de autenticación, etc.)
 }));
 
 app.use(morgan("dev"));
