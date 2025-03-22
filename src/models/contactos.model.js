@@ -11,8 +11,6 @@ const contactoSchema = new mongoose.Schema(
             type: String,
             required: true,
             trim: true,
-            lowercase: true,
-            match: [/.+\@.+\..+/, 'Por favor ingrese un correo válido'],
         },
         user: {
             type: mongoose.Schema.Types.ObjectId,

@@ -25,6 +25,7 @@ import redesSociales from "./routes/redes.sociales.routes.js";
 import dispositivo from "./routes/dispositivos.routes.js";
 import estadoDispositivoo from "./routes/estadoDispositivo.routes.js"
 import contacto from "./routes/contacto.routes.js"
+import citas from "./routes/citas.routes.js"
 
 // Cargar las variables de entorno
 dotenv.config();
