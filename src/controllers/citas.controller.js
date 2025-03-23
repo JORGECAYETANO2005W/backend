@@ -98,7 +98,7 @@ export const getCitasByUser = async (req, res) => {
       const userId = req.user.id; // Obtener el ID del usuario autenticado desde el token
   
       // Buscar las citas donde el campo user coincida con el ID del usuario
-      const citas = await Cita.find({ user: userId }).populate('user', 'name email');
+      const citas = await Cita.find({ user: userId }).populate('user');
   
       res.json(citas);
     } catch (error) {
