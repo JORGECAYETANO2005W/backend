@@ -14,9 +14,7 @@ export const getCitas = async (req, res) => {
 // Crear una cita
 export const createCita = async (req, res) => {
     try {
-        if (req.user.role !== 'admin') {
-            return res.status(403).json({ message: "Acción no permitida. Solo para administradores." });
-        }
+
 
         const { fecha, horario } = req.body;
 
@@ -55,9 +53,7 @@ export const getCita = async (req, res) => {
 // Eliminar una cita
 export const deleteCita = async (req, res) => {
     try {
-        if (req.user.role !== 'admin') {
-            return res.status(403).json({ message: "Acción no permitida. Solo para administradores." });
-        }
+ 
 
         const cita = await Cita.findByIdAndDelete(req.params.id);
         if (!cita) return res.status(404).json({ message: 'Cita no encontrada' });
@@ -70,9 +66,6 @@ export const deleteCita = async (req, res) => {
 // Actualizar una cita (incluyendo el estado)
 export const updateCita = async (req, res) => {
     try {
-        if (req.user.role !== 'admin') {
-            return res.status(403).json({ message: "Acción no permitida. Solo para administradores." });
-        }
 
         const { id } = req.params;
         const { user, ...updateData } = req.body;
