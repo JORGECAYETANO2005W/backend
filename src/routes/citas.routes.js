@@ -27,7 +27,8 @@ router.delete('/citas/:id', authRequired, deleteCita);
 
 // Ruta para actualizar una cita por su ID (requiere autenticación)
 router.put('/citas/:id', authRequired, updateCita);
-router.get('/citas/mis-citas', authRequired, getCitasByUser);
+
+router.get("/citas/:id",authRequired, getCitasByUser)
 
 export default router;
 
