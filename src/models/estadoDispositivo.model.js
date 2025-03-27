@@ -17,19 +17,19 @@ const EstadoDispositivoSchema = new mongoose.Schema(
         },
         cantidadComidaRecipiente: {
             type: Number,
-            required: true,
+            required:false,
         },
         cantidadAguaRecipiente: {
             type: Number,
-            required: true,
+            required: false,
         },
         platoComidaLleno: {
             type: Boolean,
-            required: true,
+            required:false,
         },
         platoAguaLleno: {
             type: Boolean,
-            required: true,
+            required: false
         }
     },
     {
