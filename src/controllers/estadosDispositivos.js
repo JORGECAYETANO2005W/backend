@@ -2,58 +2,58 @@ import EstadoDispositivo from '../models/estadoDispositivo.model.js';
 import Dispositivo from '../models/dispositivo.model.js';
 
 // Guardar estado del dispositivo enviado desde ESP32
-// Guardar o actualizar estado del dispositivo enviado desde ESP32
 export const saveEstadoDispositivo = async (req, res) => {
     try {
         const { 
             macAddress, 
-            temperatura, 
-            humedad, 
-            humedadSuelo, 
-            luz,
-            ventanaAbierta, 
-            ventiladorActivo, 
-            ventiladorVelocidad, 
-            riegoActivo 
+            bombaAgua,
+            ultimaComida,
+            cantidadComidaRecipiente,
+            cantidadAguaRecipiente,
+            platoComidaLleno,
+            platoAguaLleno
         } = req.body;
 
-        // Verificar si el dispositivo existe en la base de datos
-        const dispositivoExistente = await Dispositivo.findOne({ macAddress });
-        
-        if (!dispositivoExistente) {
-            console.log(`Dispositivo con MAC ${macAddress} no registrado pero se guardará su estado`);
+        // Validación de campos requeridos
+        if (!macAddress || bombaAgua === undefined || ultimaComida === undefined) {
+            return res.status(400).json({ 
+                message: "Faltan campos requeridos: macAddress, bombaAgua, ultimaComida" 
+            });
         }
 
-        // Buscar y actualizar el estado del dispositivo si ya existe
+        // Buscar y actualizar el estado del dispositivo
         const estadoActualizado = await EstadoDispositivo.findOneAndUpdate(
             { macAddress }, // Criterio de búsqueda
             {
-                temperatura,
-                humedad,
-                humedadSuelo,
-                luz,
-                ventanaAbierta,
-                ventiladorActivo,
-                ventiladorVelocidad,
-                riegoActivo,
-                updatedAt: new Date() // Actualizar la fecha de modificación
+                bombaAgua,
+                ultimaComida,
+                cantidadComidaRecipiente: cantidadComidaRecipiente || 0, // Valor por defecto si no viene
+                cantidadAguaRecipiente: cantidadAguaRecipiente || 0,      // Valor por defecto si no viene
+                platoComidaLleno: platoComidaLleno || false,              // Valor por defecto si no viene
+                platoAguaLleno: platoAguaLleno || false,                 // Valor por defecto si no viene
+                updatedAt: new Date()
             },
             { 
-                upsert: true, // Crear un nuevo documento si no existe
+                upsert: true, // Crear nuevo documento si no existe
                 new: true // Devuelve el documento actualizado
             }
         );
 
         res.status(201).json({ 
-            message: "Estado del dispositivo guardado/actualizado con éxito",
-            estado: estadoActualizado
+            success: true,
+            message: "Estado del alimentador actualizado correctamente",
+            data: estadoActualizado
         });
+        
     } catch (error) {
-        console.error('Error al guardar/actualizar estado del dispositivo:', error);
-        res.status(500).json({ message: "Error al guardar/actualizar el estado del dispositivo", error: error.message });
+        console.error('Error al guardar estado del alimentador:', error);
+        res.status(500).json({ 
+            success: false,
+            message: "Error interno al guardar el estado del dispositivo",
+            error: error.message 
+        });
     }
 };
-
 
 // Obtener historial de estados de un dispositivo por MAC
 export const getEstadosByMac = async (req, res) => {
