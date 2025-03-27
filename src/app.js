@@ -33,7 +33,7 @@ dotenv.config();
 const app = express();
 
 // Configuración de CORS
-const allowedOrigins = ["http://localhost:8081", "http://localhost:5173","https://lovely-caramel-3aa9ae.netlify.app"];
+const allowedOrigins = ["http://localhost:8081", "http://localhost:5173","https://lovely-caramel-3aa9ae.netlify.app","https://huellitasa.netlify.app"];
 app.use(cors({
     origin: function(origin, callback) {
         // Allow requests with no origin (like mobile apps, curl requests)
