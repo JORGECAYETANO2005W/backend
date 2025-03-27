@@ -1,44 +1,40 @@
 import mongoose from "mongoose";
 
-const estadoDispositivoSchema = new mongoose.Schema(
+const EstadoDispositivoSchema = new mongoose.Schema(
     {
         macAddress: {
             type: String,
             required: true,
+            unique: true,
         },
-        temperatura: {
-            type: Number,
-            required: true,
-        },
-        humedad: {
-            type: Number,
-            required: true,
-        },
-        humedadSuelo: {
-            type: Number,
-            required: true,
-        },
-        ventanaAbierta: {
+        bombaAgua: {
             type: Boolean,
             required: true,
         },
-        ventiladorActivo: {
-            type: Boolean,
-            required: true,
-        },
-        ventiladorVelocidad: {
+        ultimaComida: {
             type: Number,
             required: true,
         },
-        riegoActivo: {
+        cantidadComidaRecipiente: {
+            type: Number,
+            required: true,
+        },
+        cantidadAguaRecipiente: {
+            type: Number,
+            required: true,
+        },
+        platoComidaLleno: {
             type: Boolean,
             required: true,
         },
+        platoAguaLleno: {
+            type: Boolean,
+            required: true,
+        }
     },
     {
         timestamps: true,
     }
 );
 
-export default mongoose.model("EstadoDispositivo", estadoDispositivoSchema);
-
+export default mongoose.model("EstadoDispositivo", EstadoDispositivoSchema );
